@@ -3,18 +3,24 @@ import Dashboard from './pages/Dashboard'
 import Devices from './pages/Devices'
 import Transfers from './pages/Transfers'
 import Users from './pages/Users'
-import Login from './pages/Login'
+
 import { useState } from 'react'
 
 export default function App() {
+  const adminProfile = { id: 1, name: "View as Admin", email: "admin", role: "admin", department: "Demo" }
+  const userProfile = { id: 2, name: "View as User", email: "user", role: "member", department: "Demo" }
+  
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('auth_user')
-    return saved ? JSON.parse(saved) : null
+    return saved ? JSON.parse(saved) : adminProfile
   })
 
-  // Prevent accessing if not logged in
-  if (!user) {
-    return <Login onLogin={setUser} />
+  const toggleRole = () => {
+    const newProfile = user.role === 'admin' ? userProfile : adminProfile
+    localStorage.setItem('auth_user', JSON.stringify(newProfile))
+    setUser(newProfile)
+    // small reload to clear states
+    window.location.reload()
   }
 
   const links = [
@@ -70,8 +76,8 @@ export default function App() {
                 </div>
               </div>
             </div>
-            <button onClick={() => { localStorage.removeItem('auth_user'); setUser(null); }} className="text-gray-500 hover:text-rose-400 transition-colors" title="Logout">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <button onClick={toggleRole} className="text-indigo-400 font-bold hover:text-indigo-300 transition-colors text-xs bg-indigo-500/20 px-2 py-1 rounded" title="Toggle Role">
+              Swap
             </button>
           </div>
         </div>
