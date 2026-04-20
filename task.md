@@ -1,0 +1,36 @@
+# Asset Management Tracking System
+
+## Planning
+- [/] Create implementation plan
+- [ ] Get user approval on plan
+
+## Backend (Python + FastAPI + SQLite)
+- [ ] Initialize project structure
+- [ ] Set up database schema and models
+- [ ] Create seed/mock data
+- [ ] Implement API routes:
+  - [ ] Dashboard stats (total users, total devices, acquired, available)
+  - [ ] Devices CRUD
+  - [ ] Device transfer (request, approve, queue)
+  - [ ] Users CRUD
+  - [ ] Transfer request management
+- [ ] Add validation and error handling
+
+## Frontend (React + Vite)
+- [ ] Initialize React project with Vite
+- [ ] Set up design system (colors, typography, layout)
+- [ ] Build core components:
+  - [ ] Dashboard overview cards
+  - [ ] Device table with expandable rows
+  - [ ] Device detail panel
+  - [ ] Transfer request modal/flow
+  - [ ] Queue/notification view
+  - [ ] User management view
+- [ ] Integrate with mock API / backend
+- [ ] Add responsive design and polish
+
+## Verification
+- [ ] Run backend API tests
+- [ ] Test frontend in browser
+- [ ] Verify device transfer workflow
+- [ ] Create walkthrough
