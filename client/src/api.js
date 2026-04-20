@@ -6,18 +6,46 @@
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 let devices = [
-  { id: 1, target_board: 'ERD',  asset_device_no: 'ERD-001', serial_number: 'SN-E001', sample_number: 'S1', project_team: 'Platform', status: 'in_use', owner_id: 1, owner_name: 'Admin User', current_owner_id: 1, current_owner_name: 'Admin User', location: 'Lab A', hw_revision: 'v1.0', mac_address: '11:22:33:AA:BB' },
-  { id: 2, target_board: 'SMDK', asset_device_no: 'SMDK-002', serial_number: 'SN-S002', sample_number: 'S2', project_team: 'Modem', status: 'available', owner_id: 2, owner_name: 'Standard User', location: 'Storage', hw_revision: 'v1.2', mac_address: 'AA:BB:CC:DD:EE' },
-  { id: 3, target_board: 'ERD',  asset_device_no: 'ERD-003', serial_number: 'SN-E003', sample_number: 'S1', project_team: 'Camera', status: 'maintenance', owner_id: 1, owner_name: 'Admin User', current_owner_name: 'IT Support', location: 'Repair Depot', hw_revision: 'v1.0' },
-  { id: 4, target_board: 'SMDK', asset_device_no: 'SMDK-004', serial_number: 'SN-S004', sample_number: 'S3', project_team: 'Platform', status: 'in_use', owner_id: 2, owner_name: 'Standard User', current_owner_name: 'Standard User', location: 'Desk 4', hw_revision: 'v2.1' },
+  { 
+    id: 1, target_board: 'ERD', asset_device_no: 'ERD-101', serial_number: 'SN-X1K2', sample_number: 'Q1-Alpha', project_team: 'Platform', 
+    status: 'in_use', owner_id: 1, owner_name: 'Admin User', current_owner_id: 1, current_owner_name: 'Admin User', 
+    location: 'Bldg 4 - Server Rack A', hw_revision: 'v2.1', mac_address: 'AA:11:BB:22:CC:33', ram_size: '32GB LPDDR5X', 
+    storage_capacity: '1TB UFS 4.0', os_version: 'Android 15 (Beta 2)', summary: 'Primary bring-up board for next-gen flagship SoC validation.'
+  },
+  { 
+    id: 2, target_board: 'SMDK', asset_device_no: 'SMDK-204', serial_number: 'SN-B2Z4', sample_number: 'M3-Beta', project_team: 'Modem', 
+    status: 'available', owner_id: 2, owner_name: 'Standard User', location: 'Lab B - RF Shield Box', hw_revision: 'v1.0.5', 
+    mac_address: 'FF:EE:DD:CC:BB:AA', ram_size: '16GB LPDDR5', storage_capacity: '256GB UFS', os_version: 'AOSP 14', 
+    summary: 'Dedicated 5G mmWave evaluation kit. Requires liquid cooling attachment.'
+  },
+  { 
+    id: 3, target_board: 'ERD', asset_device_no: 'ERD-305', serial_number: 'SN-C4F1', sample_number: 'C1-Proto', project_team: 'Camera', 
+    status: 'maintenance', owner_id: 1, owner_name: 'Admin User', current_owner_name: 'Hardware Support', location: 'Repair Depot', 
+    hw_revision: 'v1.4', mac_address: '00:1A:2B:3C:4D:5E', ram_size: '24GB', storage_capacity: '512GB', os_version: 'QNX RTOS', 
+    summary: 'Currently experiencing sensor detachment issue on ISP-2 module.'
+  },
+  { 
+    id: 4, target_board: 'SMDK', asset_device_no: 'SMDK-412', serial_number: 'SN-D5G5', sample_number: 'D4-Gamma', project_team: 'Display', 
+    status: 'in_use', owner_id: 2, owner_name: 'Standard User', current_owner_name: 'Standard User', location: 'Desk 42', 
+    hw_revision: 'v3.0 (OLED Variant)', mac_address: '12:34:56:78:9A:BC', ram_size: '16GB', storage_capacity: '256GB', 
+    summary: 'Connected to external 8K reference display matrix.'
+  },
+  { 
+    id: 5, target_board: 'ERD', asset_device_no: 'ERD-155', serial_number: 'SN-A1B2', sample_number: 'A1', project_team: 'Audio', 
+    status: 'available', owner_id: 1, owner_name: 'Admin User', location: 'Acoustic Chamber 2', hw_revision: 'v1.1', 
+    mac_address: '00:11:22:33:44:55', ram_size: '8GB', storage_capacity: '128GB', summary: 'Used for spatial audio validation.'
+  },
+  { 
+    id: 6, target_board: 'ERD', asset_device_no: 'ERD-882', serial_number: 'SN-Z9Y8', sample_number: 'Z1', project_team: 'Platform', 
+    status: 'retired', owner_id: 1, owner_name: 'Admin User', location: 'Deep Storage Facility', hw_revision: 'v0.9', 
+    summary: 'Legacy engineering sample. Bootloader locked permanently.'
+  },
+  { 
+    id: 7, target_board: 'SMDK', asset_device_no: 'SMDK-900', serial_number: 'SN-W7W7', sample_number: 'W-Max', project_team: 'Connectivity', 
+    status: 'in_use', owner_id: 1, owner_name: 'Wi-Fi Team', current_owner_name: 'Admin User', location: 'Lab C', 
+    hw_revision: 'v2.2', mac_address: 'FC:FB:FA:F9:F8:F7', ram_size: '16GB', os_version: 'Android 15', summary: 'Wi-Fi 7 certification testing.'
+  }
 ];
-
-for(let i=5; i<=25; i++) {
-  devices.push({
-    id: i, target_board: i%2===0?'ERD':'SMDK', asset_device_no: `DEV-0${i}`, serial_number: `B-00${i}`, project_team: ['Platform','Modem','Audio','Display','Camera'][i%5],
-    status: i%3===0 ? 'available' : 'in_use', owner_name: 'Demo System', current_owner_name: i%3===0 ? null : 'Tester', location: `Rack ${i%4}`
-  });
-}
 
 let transfers = [
   { id: 1, device_id: 1, device: devices.find(d=>d.id===1), requester_id: 2, requester_name: 'Standard User', current_holder_id: 1, current_holder_name: 'Admin User', status: 'pending', request_date: new Date().toISOString(), notes: 'Need this board for kernel debug.' }
