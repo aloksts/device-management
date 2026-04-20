@@ -109,6 +109,21 @@ export async function updateTransfer(id, status) {
   return t;
 }
 
+
+export async function approveTransfer(id) {
+  await delay(200);
+  const t = transfers.find(x => x.id === id);
+  if (t) t.status = 'approved';
+  return t;
+}
+
+export async function rejectTransfer(id) {
+  await delay(200);
+  const t = transfers.find(x => x.id === id);
+  if (t) t.status = 'rejected';
+  return t;
+}
+
 export async function fetchTeams() {
   await delay(100);
   return [...new Set(devices.map(d => d.project_team))].filter(Boolean);
