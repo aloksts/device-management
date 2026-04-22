@@ -158,7 +158,11 @@ export default function Dashboard() {
                   <p className="text-xs text-gray-400 font-mono mb-3">{d.serial_number}</p>
                   
                   <div className="space-y-1.5 text-xs">
-                    <div className="flex justify-between"><span className="text-gray-500">Holder:</span><span className="text-gray-300">{d.current_owner_name || '—'}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500">Holder:</span><span className="text-gray-300">{d.current_owner_name || '—'}
+                      {d.status === 'in_use' && d.assignment_date && (
+                        <span className="text-[10px] ml-1.5 text-gray-500">({Math.floor((new Date() - new Date(d.assignment_date)) / (1000 * 60 * 60 * 24))}d)</span>
+                      )}
+                    </span></div>
                     <div className="flex justify-between"><span className="text-gray-500">Location:</span><span className="text-slate-400">{d.location || '—'}</span></div>
                   </div>
                 </div>

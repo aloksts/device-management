@@ -8,7 +8,7 @@ const delay = (ms) => new Promise(res => setTimeout(res, ms));
 let devices = [
   { 
     id: 1, target_board: 'ERD', asset_device_no: 'ERD-101', serial_number: 'SN-X1K2', sample_number: 'Q1-Alpha', project_team: 'Platform', 
-    status: 'in_use', owner_id: 1, owner_name: 'Admin User', current_owner_id: 1, current_owner_name: 'Admin User', 
+    status: 'in_use', owner_id: 1, owner_name: 'Admin User', current_owner_id: 1, current_owner_name: 'Admin User', assignment_date: new Date(Date.now() - 10*24*60*60*1000).toISOString(), 
     location: 'Bldg 4 - Server Rack A', hw_revision: 'v2.1', mac_address: 'AA:11:BB:22:CC:33', ram_size: '32GB LPDDR5X', 
     storage_capacity: '1TB UFS 4.0', os_version: 'Android 15 (Beta 2)', summary: 'Primary bring-up board for next-gen flagship SoC validation.'
   },
@@ -26,7 +26,7 @@ let devices = [
   },
   { 
     id: 4, target_board: 'SMDK', asset_device_no: 'SMDK-412', serial_number: 'SN-D5G5', sample_number: 'D4-Gamma', project_team: 'Display', 
-    status: 'in_use', owner_id: 2, owner_name: 'Standard User', current_owner_name: 'Standard User', location: 'Desk 42', 
+    status: 'in_use', owner_id: 2, owner_name: 'Standard User', current_owner_name: 'Standard User', assignment_date: new Date(Date.now() - 4*24*60*60*1000).toISOString(), location: 'Desk 42', 
     hw_revision: 'v3.0 (OLED Variant)', mac_address: '12:34:56:78:9A:BC', ram_size: '16GB', storage_capacity: '256GB', 
     summary: 'Connected to external 8K reference display matrix.'
   },
@@ -42,7 +42,7 @@ let devices = [
   },
   { 
     id: 7, target_board: 'SMDK', asset_device_no: 'SMDK-900', serial_number: 'SN-W7W7', sample_number: 'W-Max', project_team: 'Connectivity', 
-    status: 'in_use', owner_id: 1, owner_name: 'Wi-Fi Team', current_owner_name: 'Admin User', location: 'Lab C', 
+    status: 'in_use', owner_id: 1, owner_name: 'Wi-Fi Team', current_owner_name: 'Admin User', assignment_date: new Date(Date.now() - 28*24*60*60*1000).toISOString(), location: 'Lab C', 
     hw_revision: 'v2.2', mac_address: 'FC:FB:FA:F9:F8:F7', ram_size: '16GB', os_version: 'Android 15', summary: 'Wi-Fi 7 certification testing.'
   }
 ];

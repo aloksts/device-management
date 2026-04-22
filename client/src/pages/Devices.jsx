@@ -183,7 +183,12 @@ export default function Devices() {
                       <td className="py-3 px-4 font-mono text-xs text-gray-500">{d.serial_number}</td>
                       <td className="py-3 px-4">{d.project_team}</td>
                       <td className="py-3 px-4">{d.owner_name}</td>
-                      <td className="py-3 px-4">{d.current_owner_name || '—'}</td>
+                      <td className="py-3 px-4">{d.current_owner_name || '—'}
+                          {d.status === 'in_use' && d.assignment_date && (
+                            <span className="text-[10px] ml-2 px-1.5 py-0.5 rounded-md bg-white/5 text-gray-400 font-medium tracking-wide whitespace-nowrap">
+                              {Math.floor((new Date() - new Date(d.assignment_date)) / (1000 * 60 * 60 * 24))} days
+                            </span>
+                          )}</td>
                       <td className="py-3 px-4"><StatusBadge status={d.status} /></td>
                       <td className="py-3 px-4 text-right">
                         <button
