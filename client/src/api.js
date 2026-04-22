@@ -47,13 +47,53 @@ let devices = [
   }
 ];
 
+
+const extraUsers = [
+  { id: 1, name: 'System Admin (demo)' },
+  { id: 2, name: 'Standard User (demo)' },
+  { id: 3, name: 'Sarah Connor' },
+  { id: 4, name: 'John Smith' },
+  { id: 5, name: 'Maria Garcia' },
+  { id: 6, name: 'David Chen' },
+  { id: 7, name: 'Aisha Patel' },
+  { id: 8, name: 'James Wilson' }
+];
+
+for(let i=8; i<=17; i++) {
+  const u = extraUsers[i % extraUsers.length];
+  const isAvailable = i % 3 === 0;
+  const randomDaysAgo = (i * 3) % 45 + 1; 
+  
+  // Recreating backticks to avoid bash escaping
+  devices.push({
+    id: i, 
+    target_board: i % 2 === 0 ? 'ERD' : 'SMDK', 
+    asset_device_no: 'DEV-40' + i, 
+    serial_number: 'SN-K00' + i, 
+    project_team: ['Platform','Modem','Audio','Display','Camera'][i%5],
+    status: isAvailable ? 'available' : 'in_use', 
+    owner_name: extraUsers[(i + 1) % extraUsers.length].name, 
+    current_owner_name: isAvailable ? null : u.name, 
+    location: 'Lab ' + (i%3 + 1) + ' Rack ' + (i%5),
+    assignment_date: !isAvailable ? new Date(Date.now() - randomDaysAgo * 24*60*60*1000).toISOString() : null,
+    ram_size: ((i%4 + 1) * 8) + 'GB',
+    os_version: 'Android ' + (14 + (i%2))
+  });
+}
+
 let transfers = [
   { id: 1, device_id: 1, device: devices.find(d=>d.id===1), requester_id: 2, requester_name: 'Standard User', current_holder_id: 1, current_holder_name: 'Admin User', status: 'pending', request_date: new Date().toISOString(), notes: 'Need this board for kernel debug.' }
 ];
 
 let users = [
-  { id: 1, name: "Admin View", email: "admin", department: "Operations", role: "admin", device_count: 5 },
-  { id: 2, name: "Standard View", email: "user", department: "Engineering", role: "member", device_count: 2 },
+  { id: 1, name: 'System Admin (demo)', email: 'admin', department: 'Operations', role: 'admin' },
+  { id: 2, name: 'Standard User (demo)', email: 'user', department: 'Engineering', role: 'member' },
+  { id: 3, name: 'Sarah Connor', email: 'sarah@company.com', department: 'Platform', role: 'admin' },
+  { id: 4, name: 'John Smith', email: 'jsmith@company.com', department: 'Modem', role: 'admin' },
+  { id: 5, name: 'Maria Garcia', email: 'maria@company.com', department: 'Camera', role: 'admin' },
+  { id: 6, name: 'David Chen', email: 'dchen@company.com', department: 'Audio', role: 'member' },
+  { id: 7, name: 'Aisha Patel', email: 'apatel@company.com', department: 'Display', role: 'member' },
+  { id: 8, name: 'James Wilson', email: 'jwilson@company.com', department: 'Connectivity', role: 'member' }
 ];
 
 export async function fetchDashboard() {
