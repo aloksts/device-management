@@ -3,6 +3,7 @@ import { createTransfer } from '../api'
 
 export default function TransferModal({ device, onClose, onDone }) {
   const [notes, setNotes] = useState('')
+  const [expectedEndDate, setExpectedEndDate] = useState(new Date(Date.now() + 14 * 24*60*60*1000).toISOString().split('T')[0])
   const [loading, setLoading] = useState(false)
   const user = JSON.parse(localStorage.getItem('auth_user') || '{}')
 
@@ -13,6 +14,7 @@ export default function TransferModal({ device, onClose, onDone }) {
     await createTransfer({
       device_id: device.id,
       requester_id: user.id,
+      expected_return_date: expectedEndDate,
       notes,
     })
     setLoading(false)
@@ -38,6 +40,16 @@ export default function TransferModal({ device, onClose, onDone }) {
             <div className="w-full bg-slate-950/50 border border-white/5 rounded-xl px-4 py-3 text-gray-200 cursor-not-allowed">
               {user.name} ({user.department})
             </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-400 mb-2">Expected Return Date</label>
+            <input
+              type="date"
+              required
+              value={expectedEndDate}
+              onChange={e => setExpectedEndDate(e.target.value)}
+              className="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 mb-4"
+            />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">Transfer Notes</label>

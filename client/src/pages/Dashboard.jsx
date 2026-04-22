@@ -160,7 +160,7 @@ export default function Dashboard() {
                   <div className="space-y-1.5 text-xs">
                     <div className="flex justify-between"><span className="text-gray-500">Holder:</span><span className="text-gray-300">{d.current_owner_name || '—'}
                       {d.status === 'in_use' && d.assignment_date && (
-                        <span className="text-[10px] ml-1.5 text-gray-500">({Math.floor((new Date() - new Date(d.assignment_date)) / (1000 * 60 * 60 * 24))}d)</span>
+                        <span className="text-[10px] ml-1.5 text-gray-500">({new Date(d.assignment_date).toLocaleDateString('en-US',{month:'short', day:'numeric'})} - {d.expected_return_date ? new Date(d.expected_return_date).toLocaleDateString('en-US',{month:'short', day:'numeric'}) : 'TBD'})</span>
                       )}
                     </span></div>
                     <div className="flex justify-between"><span className="text-gray-500">Location:</span><span className="text-slate-400">{d.location || '—'}</span></div>

@@ -158,7 +158,7 @@ export default function Devices() {
                   <th className="text-left py-4 px-4 font-medium">Team</th>
                   <th className="text-left py-4 px-4 font-medium">Owner</th>
                   <th className="text-left py-4 px-4 font-medium">Current Holder</th>
-                  <th className="text-left py-4 px-4 font-medium">Days Held</th>
+                  <th className="text-left py-4 px-4 font-medium">Allocation Period</th>
                   <th className="text-left py-4 px-4 font-medium">Status</th>
                   <th className="text-right py-4 px-4 font-medium">Actions</th>
                 </tr>
@@ -187,7 +187,7 @@ export default function Devices() {
                       <td className="py-3 px-4">{d.current_owner_name || '—'}</td>
                       <td className="py-3 px-4 text-gray-400 font-mono text-xs">
                         {d.status === 'in_use' && d.assignment_date 
-                          ? Math.floor((new Date() - new Date(d.assignment_date)) / (1000 * 60 * 60 * 24)) + 'd'
+                          ? new Date(d.assignment_date).toLocaleDateString('en-US',{month:'short', day:'numeric'}) + ' - ' + (d.expected_return_date ? new Date(d.expected_return_date).toLocaleDateString('en-US',{month:'short', day:'numeric'}) : 'TBD')
                           : '—'}
                       </td>
                       <td className="py-3 px-4"><StatusBadge status={d.status} /></td>
