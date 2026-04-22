@@ -158,6 +158,7 @@ export default function Devices() {
                   <th className="text-left py-4 px-4 font-medium">Team</th>
                   <th className="text-left py-4 px-4 font-medium">Owner</th>
                   <th className="text-left py-4 px-4 font-medium">Current Holder</th>
+                  <th className="text-left py-4 px-4 font-medium">Days Held</th>
                   <th className="text-left py-4 px-4 font-medium">Status</th>
                   <th className="text-right py-4 px-4 font-medium">Actions</th>
                 </tr>
@@ -202,7 +203,7 @@ export default function Devices() {
                     </tr>
                     {expandedRow === d.id && (
                       <tr className="bg-white/[0.01] border-b border-white/5">
-                        <td colSpan={8} className="py-4 px-6 sm:px-12">
+                        <td colSpan={9} className="py-4 px-6 sm:px-12">
                           <div className="flex flex-col xl:flex-row gap-8">
                             <div className="space-y-6 flex-1">
                               <div>
